@@ -24,6 +24,9 @@
                     crossorigin="anonymous"></script>
                     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
                     <script src="js/app.js"></script>
+                    <script>
+                        $(function () { $('[data-toggle="tooltip"]').tooltip() })
+                    </script>
 </head>
 
 <body ng-controller="jsonQueryController">
@@ -43,7 +46,7 @@
         <div class="row">
             <form name="mainForm">
                 <div class="form-group row">
-                    <label for="start-time-input" class="col-2 col-form-label">Start Time</label>
+                    <label for="start-time-input" class="col-2 col-form-label" data-toggle="tooltip" data-placement="left" title="enter start time in mm/dd/yyyy hh:mm am/pm format">Start Time</label>
                     <div class="col-5">
                         <input class="form-control" type="datetime-local" id="start-time-input" ng-change="checkDateErr(start_time,end_time)" ng-blur="convertTime('start',start_time)"
                             ng-model="start_time" required>
@@ -51,7 +54,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="end-time-input" class="col-2 col-form-label">End Time</label>
+                    <label for="end-time-input" class="col-2 col-form-label" data-toggle="tooltip" data-placement="left" title="enter end time in mm/dd/yyyy hh:mm am/pm format">End Time</label>
                     <div class="col-5">
                         <input class="form-control" type="datetime-local" id="end-time-input" ng-change="checkDateErr(start_time,end_time)" ng-blur="convertTime('end',end_time)"
                             ng-model="end_time" required>
@@ -62,7 +65,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-4 col-form-label">Select Fields</label>
+                    <label class="col-4 col-form-label" data-toggle="tooltip" data-placement="left" title="select the select fields">Select Fields</label>
                     <div class="col-12">
                         <div class="form-check form-check-inline" ng-repeat="field in fields">
                             <label class="form-check-label">
@@ -74,14 +77,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="table_name-text-input" class="col-2 col-form-label">Table Name</label>
+                    <label for="table_name-text-input" class="col-2 col-form-label" data-toggle="tooltip" data-placement="left" title="enter name of the table">Table Name</label>
                     <div class="col-4">
                         <input class="form-control inputWidth" type="text" ng-model="jsonObj.table_name" id="table_name-text-input">
                     </div>
                 </div>
                 <div class="form-group row">
 
-                    <label class="col-4 col-form-label">Where clause</label>
+                    <label class="col-4 col-form-label" data-toggle="tooltip" data-placement="left" title="enter where clause with and/or selection">Where clause</label>
 
                 </div>
                 <div>
@@ -110,12 +113,11 @@
                                 <option>!=</option>
                             </select>
                             <div class="col-4">
-                                <input class="form-control" type="text" ng-model="input.value" placeholder="Field Value" id="example-text-input"
-                                    required>
+                                <input class="form-control" type="text" ng-model="input.value" placeholder="Field Value" id="example-text-input" required>
                             </div>
                             <div class="col-4">
                                 <button class="btn btn-outline-success btn-sm adjustDropdownMargin" ng-click="onAddClause(input)">Add Clause</button>
-                                <div class="errMsg"  ng-if="showErrWhereClauseMsg">
+                                <div class="errMsg" ng-if="showErrWhereClauseMsg">
                                     <span class="alert alert-danger">{{errWhereClauseMsg}}</span>
                                 </div>
                             </div>
@@ -130,14 +132,14 @@
                                 <div class="col-2 form-control alert alert-secondary" id="sourceFieldSelect" ng-model="item.name">
                                     {{item.name}}
                                 </div>
-                                <div class="col-1 form-control alert alert-secondary" id="operatorSelect" ng-model="item.operator">
+                                <div class="col-1 form-control alert alert-secondary adjustDropdownMargin" id="operatorSelect" ng-model="item.operator">
                                     {{item.operator}}
                                 </div>
                                 <div class="col-4 form-control alert alert-secondary adjustDropdownMargin" id="operatorSelect" ng-model="item.value">
                                     {{item.value}}
                                 </div>
                                 <div class="col-4">
-                                <button type="submit" class="btn btn-outline-danger btn-sm" ng-click="onRemoveClause($parent.$index,$index)">Remove</button><br>
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" ng-click="onRemoveClause($parent.$index,$index)">Remove</button><br>
                                 </div>
                             </div>
 
@@ -152,8 +154,10 @@
                 <div class="form-group row">
                     <div class="col-8">
                         <button type="submit" class="btn btn-primary" ng-click="validateJsonQuery()">Submit</button>
+
                     </div>
                 </div>
+
             </form>
         </div>
 
@@ -161,8 +165,10 @@
             <h5> <label>{{jsonQuery}}</label></h5>
         </div>
         <div class="row" ng-if="submit">
-            <div class="alert alert-success result">JSON : {{jsonObj}}</div>
         </div>
+
+        <button type="submit" class="btn btn-Secondary" ng-click="removeJsonQuery()">Clear</button>
+
     </div>
 
 </body>
