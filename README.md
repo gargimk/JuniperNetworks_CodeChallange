@@ -1,7 +1,7 @@
 # JuniperNetworks_CodeChallange
 
 # Required
-•	Node.js (v6.x.x and above) installed 
+•	Node.js (v6.9.x and above) installed 
 
 # Get Started
 1.	git clone https://github.com/gargimk/JuniperNetworks_CodeChallange.git
