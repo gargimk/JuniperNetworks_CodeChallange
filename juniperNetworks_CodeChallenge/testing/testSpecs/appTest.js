@@ -35,7 +35,7 @@ describe('Testing app.js ', function () {
                     input2 = { andOrSelect: "OR", name: "destination_vn", value: "backend-vn", operator: "!=" },
                     output1 = [{ name: "source_vn", value: "frontend-vn", operator: "=" }],
                     output2 = [{ name: "destination_vn", value: "backend-vn", operator: "!=" }],
-                    input = { andOrSelect: "", name: "", value: "", operator: "" };
+                    input = { andOrSelect: "AND", name: "", value: "", operator: "" };
                 scope.onAddClause(input1);
                 scope.onAddClause(input2);
                 expect(scope.jsonObj.where_clause.length).toBe(2);
