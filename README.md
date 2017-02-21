@@ -1,4 +1,4 @@
-# JuniperNetworks_CodeChallange
+# JuniperNetworks_CodeChallenge
 
 # Required
 •	Node.js (v6.9.x and above) installed 
@@ -14,7 +14,7 @@
 3.	cd juniperNetworks_CodeChallenge/testing/testConfig
 1.	Run karma start karma.conf.js to run karma app.js test cases
 2.	Run protractor conf.js to run protractor index.html test cases
-    NOTE: Site should be up at https://localhost:8000 while running protractor test
+    NOTE: Site should be up at http://localhost:8000 while running protractor test
 
 
 # How to Use
