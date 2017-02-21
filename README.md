@@ -8,7 +8,7 @@
 2.	cd juniperNetworks_CodeChallenge
 1.	Run npm install
 2.	Run npm run start
-3.	Site will be up at https://localhost:8000
+3.	Site will be up at http://localhost:8000
 4.	Run webdriver-manager update
 5.	Run webdriver-manager start
 3.	cd juniperNetworks_CodeChallenge/testing/testConfig
