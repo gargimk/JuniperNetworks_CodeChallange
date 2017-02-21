@@ -6,14 +6,18 @@
 # Get Started
 1.	git clone https://github.com/gargimk/JuniperNetworks_CodeChallange.git
 2.	cd juniperNetworks_CodeChallenge
-1.	Run npm install
-2.	Run npm run start
-3.	Site will be up at http://localhost:8000
-4.	Run webdriver-manager update
-5.	Run webdriver-manager start
-3.	cd juniperNetworks_CodeChallenge/testing/testConfig
-1.	Run karma start karma.conf.js to run karma app.js test cases
-2.	Run protractor conf.js to run protractor index.html test cases
+3.	Run npm install
+4.	Run npm run start
+5.	Site will be up at http://localhost:8000
+6.  Run npm install -g protractor
+7.	Run webdriver-manager update
+8.  Run npm install -g karma-cli
+9.	Run webdriver-manager start
+    [For Protractor installation : http://www.protractortest.org/#/tutorial]
+    [For Karma installation: http://karma-runner.github.io/1.0/intro/installation.html]
+10.	cd juniperNetworks_CodeChallenge/testing/testConfig
+11.	Run karma start karma.conf.js to run karma app.js test cases
+12.	Run protractor conf.js to run protractor index.html test cases
     NOTE: Site should be up at http://localhost:8000 while running protractor test
 
 
