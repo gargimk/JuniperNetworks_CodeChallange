@@ -1,0 +1,170 @@
+<html ng-app="jsonQueryApp">
+
+<head>
+    <title>JSON Query Builder</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!--< Latest compiled and minified CSS -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+                crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+                    crossorigin="anonymous"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+                    <script src="js/app.js"></script>
+</head>
+
+<body ng-controller="jsonQueryController">
+    <h1>
+        <center>{{title}}</center>
+    </h1>
+    <br>
+    <h3>
+        <center>{{subTitle}}</center>
+    </h3>
+
+    <div class="container">
+
+        <div class="row">
+            <h5> <label>{{formTitle}}</label></h5>
+        </div>
+        <div class="row">
+            <form name="mainForm">
+                <div class="form-group row">
+                    <label for="start-time-input" class="col-2 col-form-label">Start Time</label>
+                    <div class="col-5">
+                        <input class="form-control" type="datetime-local" id="start-time-input" ng-change="checkDateErr(start_time,end_time)" ng-blur="convertTime('start',start_time)"
+                            ng-model="start_time" required>
+                            <label ng-value="jsonObj.start_time"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="end-time-input" class="col-2 col-form-label">End Time</label>
+                    <div class="col-5">
+                        <input class="form-control" type="datetime-local" id="end-time-input" ng-change="checkDateErr(start_time,end_time)" ng-blur="convertTime('end',end_time)"
+                            ng-model="end_time" required>
+                            <div class="errMsg"> <span class="alert alert-danger errTimeMsg" ng-show="showTimeErrMsg">{{errMessage}}</span></div>
+                            <label ng-value="jsonObj.end_time"></label>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label">Select Fields</label>
+                    <div class="col-12">
+                        <div class="form-check form-check-inline" ng-repeat="field in fields">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="jsonObj.select_fields[]" value="{{field}}"
+                                        ng-checked="jsonObj.select_field.indexOf(fields) > -1" ng-click="toggleSelection(field)">
+                                        {{field}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="table_name-text-input" class="col-2 col-form-label">Table Name</label>
+                    <div class="col-4">
+                        <input class="form-control inputWidth" type="text" ng-model="jsonObj.table_name" id="table_name-text-input">
+                    </div>
+                </div>
+                <div class="form-group row">
+
+                    <label class="col-4 col-form-label">Where clause</label>
+
+                </div>
+                <div>
+                    <div class="alert alert-warning">
+                        <div class="form-group row">
+                            <label class="col-2"><strong>Select Field</strong></label>
+                            <label class="col-2"><strong>Operator</strong></label>
+                            <label class="col-3"><strong>Value</strong></label>
+                            <div>
+                                <select class="form-control andOrSelect" id="andOrSelect" ng-model="input.andOrSelect" ng-change="removeErrMsg()">
+                                <option>AND</option>
+                                <option>OR</option>
+                            </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-inline row">
+                            <select class="col-2 form-control selectFields" id="sourceFieldSelect" ng-model="input.name" ng-change="removeErrMsg()">
+                                <option>source_vn</option>
+                                <option>destination_vn</option>
+                                <option>source_port</option>
+                                <option>destination_port</option>
+                            </select>
+                            <select class="col-1 form-control adjustDropdownMargin operator" id="operatorSelect" ng-model="input.operator" ng-change="removeErrMsg()">
+                                <option>=</option>
+                                <option>!=</option>
+                            </select>
+                            <div class="col-4">
+                                <input class="form-control" type="text" ng-model="input.value" placeholder="Field Value" id="example-text-input"
+                                    required>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-outline-success btn-sm adjustDropdownMargin" ng-click="onAddClause(input)">Add Clause</button>
+                                <div class="errMsg"  ng-if="showErrWhereClauseMsg">
+                                    <span class="alert alert-danger">{{errWhereClauseMsg}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="whereClause" ng-repeat="clause in jsonObj.where_clause">
+                    <div class="alert alert-info">
+                        <div ng-repeat="item in clause">
+
+                            <div class="form-group form-inline row">
+                                <div class="col-2 form-control alert alert-secondary" id="sourceFieldSelect" ng-model="item.name">
+                                    {{item.name}}
+                                </div>
+                                <div class="col-1 form-control alert alert-secondary" id="operatorSelect" ng-model="item.operator">
+                                    {{item.operator}}
+                                </div>
+                                <div class="col-4 form-control alert alert-secondary adjustDropdownMargin" id="operatorSelect" ng-model="item.value">
+                                    {{item.value}}
+                                </div>
+                                <div class="col-4">
+                                <button type="submit" class="btn btn-outline-danger btn-sm" ng-click="onRemoveClause($parent.$index,$index)">Remove</button><br>
+                                </div>
+                            </div>
+
+                            <label ng-if="!$last">-------------AND--------------</label>
+
+                        </div>
+                    </div>
+                    <label ng-if="!$last">-------------OR--------------</label>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-primary" ng-click="validateJsonQuery()">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <h5> <label>{{jsonQuery}}</label></h5>
+        </div>
+        <div class="row" ng-if="submit">
+            <div class="alert alert-success result">JSON : {{jsonObj}}</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

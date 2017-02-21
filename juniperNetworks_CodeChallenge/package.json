@@ -1,0 +1,31 @@
+{
+  "name": "codechallenge",
+  "version": "1.0.0",
+  "description": "Juniper Networks Code Challenge",
+  "main": "app.js",
+  "dependencies": {
+    "local-web-server": "^1.2.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ws"
+  },
+  "author": "",
+  "license": "ISC",
+  "local-web-server": {
+    "port": 8000
+  },
+  "devDependencies": {
+    "angular": "^1.6.2",
+    "angular-mocks": "^1.6.2",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-html2js-preprocessor": "^1.1.0",
+    "karma-jasmine": "^1.1.0",
+    "protractor": "^5.1.1"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
