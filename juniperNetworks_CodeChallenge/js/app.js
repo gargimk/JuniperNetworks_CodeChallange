@@ -12,8 +12,6 @@ app.controller("jsonQueryController", ["$scope", function ($scope) {
     $scope.inputs = [];
     $scope.submit = false;
 
-
-
     $scope.onAddClause = function (inp) {
         $scope.showErrWhereClauseMsg = false;
         $scope.errWhereClauseMsg = "";
@@ -89,6 +87,12 @@ app.controller("jsonQueryController", ["$scope", function ($scope) {
         if ($scope.jsonObj.start_time != "" && $scope.jsonObj.end_time != "" && $scope.jsonObj.table_name != "") {
             $scope.submit = true;
         }
+
+        console.log(angular.toJson($scope.jsonObj));
+    };
+
+    $scope.removeJsonQuery = function () {
+        $scope.submit = false;
         $scope.jsonObj = {
             start_time: "",
             end_time: "",
@@ -96,8 +100,11 @@ app.controller("jsonQueryController", ["$scope", function ($scope) {
             select_field: [],
             where_clause: []
         };
-        console.log(angular.toJson($scope.jsonObj));
-    };
+        $scope.end_time = "";
+        $scope.start_time = "";
+        
+    }
+    
     $scope.checkDateErr = function (start_time, end_time) {
         $scope.errMessage = '';
         $scope.showDateErrMsg = false;
