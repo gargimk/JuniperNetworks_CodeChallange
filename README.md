@@ -4,7 +4,7 @@
 •	Node.js (v6.9.x and above) installed 
 
 # Get Started
-1.	git clone https://github.com/gargimk/JuniperNetworks_CodeChallange.git
+1.	git clone/download code https://github.com/gargimk/JuniperNetworks_CodeChallange.git
 2.	cd juniperNetworks_CodeChallenge
 3.	Run npm install
 4.	Run npm run start
